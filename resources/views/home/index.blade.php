@@ -33,51 +33,53 @@
 <body class="pb-24">
 
     <header class="bg-white sticky top-0 z-50 shadow-sm" x-data="{ openCity: false }">
-        <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex-1 mr-4 bg-gray-100 rounded-full flex items-center px-4 py-2">
-                <i class="fas fa-search text-gray-400 text-sm"></i>
-                <input type="text" placeholder="Cari di TIX ID" class="bg-transparent border-none focus:outline-none text-sm ml-2 w-full text-gray-700 font-medium placeholder-gray-400">
-            </div>
-
-            <div class="flex items-center gap-4">
-                <button class="relative">
-                    <i class="far fa-bell text-2xl text-tix-dark"></i>
-                    <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
-                </button>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button class="w-8 h-8 rounded-full overflow-hidden border border-gray-200">
-                        <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&background=1A2C50&color=fff" alt="Profile">
-                    </button>
-                </form>
-            </div>
+    <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex-1 mr-4 bg-gray-100 rounded-full flex items-center px-4 py-2">
+            <i class="fas fa-search text-gray-400 text-sm"></i>
+            <input type="text" placeholder="Cari di TIX ID" class="bg-transparent border-none focus:outline-none text-sm ml-2 w-full text-gray-700 font-medium placeholder-gray-400">
         </div>
-        
-        <div class="bg-white border-b border-gray-100 relative">
-            <div @click="openCity = !openCity" class="max-w-md mx-auto px-4 py-2 flex items-center text-tix-dark cursor-pointer hover:bg-gray-50 transition">
-                <i class="fas fa-map-marker-alt mr-2 text-lg"></i>
-                <span class="font-bold text-sm tracking-wide uppercase">{{ $currentCity }}</span>
-                <i class="fas fa-chevron-down ml-1 text-xs text-gray-400 transition-transform" :class="openCity ? 'rotate-180' : ''"></i>
-            </div>
 
-            <div x-show="openCity" @click.outside="openCity = false" class="absolute w-full bg-white shadow-lg border-t z-40 max-h-60 overflow-y-auto" style="display: none;">
-                <div class="max-w-md mx-auto">
-                    <p class="px-4 py-2 text-xs text-gray-400 bg-gray-50 font-bold">PILIH KOTA</p>
-                    @foreach($cities as $city)
-                    <button class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 border-b border-gray-100 uppercase font-medium flex justify-between items-center group">
-                        {{ $city }}
-                        @if($city == $currentCity)
-                            <i class="fas fa-check text-tix-dark"></i>
-                        @endif
-                    </button>
-                    @endforeach
-                    @if($cities->isEmpty())
-                        <p class="px-4 py-3 text-sm text-gray-400 italic">Belum ada data bioskop.</p>
+        <div class="flex items-center gap-4">
+            <button class="relative">
+                <i class="far fa-bell text-2xl text-tix-dark"></i>
+                <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+            </button>
+            
+            <!-- UPDATE: Link ke halaman Profile -->
+            <a href="{{ route('user.profile') }}" class="w-8 h-8 rounded-full overflow-hidden border border-gray-200 block">
+                <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&background=1A2C50&color=fff" alt="Profile" class="w-full h-full object-cover">
+            </a>
+            <!-- END UPDATE -->
+
+        </div>
+    </div>
+    
+    <div class="bg-white border-b border-gray-100 relative">
+        <div @click="openCity = !openCity" class="max-w-md mx-auto px-4 py-2 flex items-center text-tix-dark cursor-pointer hover:bg-gray-50 transition">
+            <i class="fas fa-map-marker-alt mr-2 text-lg"></i>
+            <span class="font-bold text-sm tracking-wide uppercase">{{ $currentCity }}</span>
+            <i class="fas fa-chevron-down ml-1 text-xs text-gray-400 transition-transform" :class="openCity ? 'rotate-180' : ''"></i>
+        </div>
+
+        <div x-show="openCity" @click.outside="openCity = false" class="absolute w-full bg-white shadow-lg border-t z-40 max-h-60 overflow-y-auto" style="display: none;">
+            <div class="max-w-md mx-auto">
+                <p class="px-4 py-2 text-xs text-gray-400 bg-gray-50 font-bold">PILIH KOTA</p>
+                @foreach($cities as $city)
+                <button class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 border-b border-gray-100 uppercase font-medium flex justify-between items-center group">
+                    {{ $city }}
+                    @if($city == $currentCity)
+                        <i class="fas fa-check text-tix-dark"></i>
                     @endif
-                </div>
+                </button>
+                @endforeach
+                @if($cities->isEmpty())
+                    <p class="px-4 py-3 text-sm text-gray-400 italic">Belum ada data bioskop.</p>
+                @endif
             </div>
         </div>
-    </header>
+    </div>
+</header>
+
 
     <div class="max-w-md mx-auto">
         
