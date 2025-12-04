@@ -189,7 +189,7 @@
                 <span class="text-[10px] font-medium tracking-wide">Tiket Saya</span>
             </a>
             
-            <a href="#" class="flex flex-col items-center justify-center text-gray-400 hover:text-tix-dark transition">
+        <a href="{{ route('user.profile') }}" class="flex flex-col items-center justify-center text-gray-400 hover:text-tix-dark transition">
                 <i class="fas fa-user text-xl mb-1"></i>
                 <span class="text-[10px] font-medium tracking-wide">Akun</span>
             </a>
